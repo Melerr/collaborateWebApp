@@ -10,6 +10,7 @@ local.properties
 .loadpath
 .recommenders
 .mvn/
+target/
 
 # External tool builders
 .externalToolBuilders/
