@@ -1,3 +1,4 @@
+target/
 .metadata
 bin/
 tmp/
@@ -5,12 +6,12 @@ tmp/
 *.bak
 *.swp
 *~.nib
+application.properties
 local.properties
 .settings/
 .loadpath
 .recommenders
 .mvn/
-target/
 
 # External tool builders
 .externalToolBuilders/
