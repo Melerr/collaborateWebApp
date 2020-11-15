@@ -8,7 +8,7 @@ tmp/
 *~.nib
 application.properties
 local.properties
-.settings/
+#.settings/
 .loadpath
 .recommenders
 .mvn/
