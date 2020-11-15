@@ -1,16 +1,31 @@
+pom.xml
+
 target/
+
 .metadata
+
 bin/
+
 tmp/
+
 *.tmp
+
 *.bak
+
 *.swp
+
 *~.nib
+
 application.properties
+
 local.properties
-#.settings/
+
+.settings/
+
 .loadpath
+
 .recommenders
+
 .mvn/
 
 # External tool builders
