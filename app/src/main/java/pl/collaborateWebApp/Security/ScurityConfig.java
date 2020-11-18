@@ -1,21 +1,34 @@
 package pl.collaborateWebApp.Security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class ScurityConfig extends WebSecurityConfigurerAdapter{
 	
+	
+	@Autowired
+	private UserDetailsService userDetailService;
+	
 	//Aythntication 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("{noop}papa").roles("USER");
+        //auth.inMemoryAuthentication().withUser("user").password("{noop}papa").roles("USER");
+    	
+    	auth.userDetailsService(userDetailService);
+    	
     }
-	
+    
+    // //////////////////////////////////           DODAC SZYFROWANIE BCRYPT    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	// Autorizathion
 	@Override
@@ -23,9 +36,19 @@ public class ScurityConfig extends WebSecurityConfigurerAdapter{
 		http.
 			authorizeRequests()
 			.antMatchers("/api/home").permitAll()
+			.antMatchers("/api/appUser").hasAnyRole("ADMIN", "USER")
+			.antMatchers("/api/appAdmin").hasAnyRole("ADMIN")
 			.anyRequest().authenticated()
 		.and()
-		.formLogin();
-
+			.formLogin()
+		.and()
+		 	.logout().logoutUrl("/api/logmeout").logoutSuccessUrl("/api/home").permitAll();
+        	//.logout().logoutUrl("/api/logmeout").logoutSuccessUrl("/api/home").permitAll();
+ 
+	}
+	
+	@Bean
+	public PasswordEncoder getPasswordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
 }

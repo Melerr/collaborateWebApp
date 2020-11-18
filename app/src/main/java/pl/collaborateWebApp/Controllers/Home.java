@@ -13,9 +13,19 @@ public class Home {
 		return "Hello TEST";
 	}
 	
-	@GetMapping("/app")
-	public String geAppTest() {
-		return "Dostęp po autoryzacji";
+	@GetMapping("/appUser")
+	public String userContent() {
+		return "Dostęp po autoryzacji dla uzytkownika";
+	}
+	
+	@GetMapping("/appAdmin")
+	public String adminContent() {
+		return "Dostęp po autoryzacji dla Adminów";
+	}
+	
+	@GetMapping("/logmeout")
+	public String logout() {
+		return "WYLOGOWANO";
 	}
 	
 

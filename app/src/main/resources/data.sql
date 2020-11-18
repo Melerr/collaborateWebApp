@@ -9,8 +9,8 @@ VALUES
 INSERT INTO `cwa`.`user_roles`
 (`id`,`description`,`role`)
 VALUES
-(1,'Administrator','ADMIN'),
-(2,'Użytkownik','USER');
+(1,'Administrator','ROLE_ADMIN'),
+(2,'Użytkownik','ROLE_USER');
 
 INSERT INTO `cwa`.`register_users_roles`
 (`user_id`,`roles_id`)
