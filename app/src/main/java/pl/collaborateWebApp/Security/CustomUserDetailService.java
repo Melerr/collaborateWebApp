@@ -1,12 +1,15 @@
 package pl.collaborateWebApp.Security;
 
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import pl.collaborateWebApp.Models.User;
@@ -26,9 +29,15 @@ public class CustomUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		
 		User user = userRepository.findByEmail(userName);
-		if(user == null)
-			throw new UsernameNotFoundException("User " + userName + " not found");
 		
+		if(user == null) {
+			throw new UsernameNotFoundException("User " + userName + " not found");
+		}
+		/*
+		user.ifPresent(u -> {
+				throw new UsernameNotFoundException("User " + userName + " not found");
+				});
+		*/
 		logger.info("Obiekt user: " + user.toString());
 		
 		return new CustomUserDetails(user);

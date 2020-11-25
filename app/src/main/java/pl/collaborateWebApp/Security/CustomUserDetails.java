@@ -6,9 +6,11 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import pl.collaborateWebApp.Models.User;
 import pl.collaborateWebApp.Models.UserRole;
@@ -17,6 +19,8 @@ import pl.collaborateWebApp.Models.UserRole;
 public class CustomUserDetails implements UserDetails{
 	
 	private Logger logger = LoggerFactory.getLogger(CustomUserDetails.class);
+	
+	//private PasswordEncoder passwordEncoder;
 	
 	private String userName;
 	private String password;
@@ -33,6 +37,14 @@ public class CustomUserDetails implements UserDetails{
 		logger.info("Pos construct, argument input constructor:" + user.toString());
 
 	}
+	/*
+	@Autowired
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+
+	}
+	*/
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -42,12 +54,20 @@ public class CustomUserDetails implements UserDetails{
 
 	@Override
 	public String getPassword() {
+		
+		logger.info("CustomUserDetails: getPassword  " + password);
+				
+		//return passwordEncoder.encode(password);
+		
 		return password;
-	}
 
+	}
 
 	@Override
 	public String getUsername() {
+		
+		logger.info("CustomUserDetails: getUsername  " + userName);
+		
 		return userName;
 	}
 
