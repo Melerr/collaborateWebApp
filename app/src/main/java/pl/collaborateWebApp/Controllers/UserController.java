@@ -21,6 +21,25 @@ import pl.collaborateWebApp.Exceptions.DuplicateUserEmailException;
 import pl.collaborateWebApp.Models.User;
 import pl.collaborateWebApp.Services.UserService;
 
+/*
+ * 
+ * TO_DO
+ * 
+ * ADD METHODS:
+ *  FOR REGISTER USER WITH ANY ROLE
+ *  - || - WITH DEFAULT ROLE - ROLE_USER
+ *  GET LIST ONLY USER WITH ROLE_USER
+ *  - || - ADMIN_ROLE
+ * 
+ * ADD MAPPED TO DTO OBJECTS
+ * 
+ * ANALYZE WHY RETURNING EXCEPTIONS DONT HAVE VALUE FOR MESSAGE ATRIBUTE
+ * 
+ *
+ * 
+ */
+
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

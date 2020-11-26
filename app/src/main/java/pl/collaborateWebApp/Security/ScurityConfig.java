@@ -26,7 +26,7 @@ public class ScurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsService userDetailService;
 	
-	/*
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		
@@ -36,12 +36,13 @@ public class ScurityConfig extends WebSecurityConfigurerAdapter{
 		
 		return passwordEncoder;
 		
-	}*/
+	}
 	
+	/*
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
-	}
+	}*/
 	
 	
 	//Aythntication 
@@ -61,16 +62,20 @@ public class ScurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		logger.info("ScurityConfig: configure HttpSecurity: START ");
+
 		
+		{
 		http.csrf().disable()
-				.authorizeRequests()
-				//.antMatchers(HttpMethod.GET, "/api/users/allRegister").permitAll()
-				//.antMatchers(HttpMethod.GET, "/api/users/allRegister").hasAnyRole("USER_ROLE", "USER_ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
-				//.antMatchers(HttpMethod.POST, "/api/users**").permitAll()
+			.authorizeRequests()
+				.antMatchers(HttpMethod.POST, "/api/users/register").hasAnyRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/api/users/allRegister").hasAnyRole("ADMIN", "USER")
+				.antMatchers("/api/home").permitAll()
 				.anyRequest().authenticated()
 			.and()
+				.formLogin()
+			.and()
 				.httpBasic();
+		}
 
 				
 		logger.info("ScurityConfig: configure HttpSecurity: END ");

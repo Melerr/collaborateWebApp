@@ -17,6 +17,17 @@ import pl.collaborateWebApp.Models.User;
 import pl.collaborateWebApp.Repositories.UserRepository;
 import pl.collaborateWebApp.Repositories.UserRoleRepository;
 
+/*
+ * TO_DO
+ * 
+ * ADD MAPPER TO DTO OBJECTS
+ * 
+ * CHANGE METHOD SAVE - DO NOT CREATE NEW OBJECT WITH ROLE AND WRITE TO DB, BUT CREATE ONLY USER OBJECT AND THEN ADD EXISTING ROLE OBJECT - CREATE REALATION BEETWEN THEM.
+ * WE WANT TO AVOID CREATING EXCESSIVE ROLE OBJECTS
+ * 
+ * */
+
+
 @Service
 public class UserService {
 	
