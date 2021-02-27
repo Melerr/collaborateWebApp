@@ -45,3 +45,12 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+
+# angular frontend
+frontend/collaborateWebAppAngular/node_modules
+frontend/collaborateWebAppAngular/dist/
+
+# vue frontend
+
+
+
